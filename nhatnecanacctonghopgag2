@@ -1,0 +1,187 @@
+-- 1. KHỞI TẠO GIAO DIỆN GỐC
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local Title = Instance.new("TextLabel")
+local NoteLabel = Instance.new("TextLabel") 
+local ToggleBtn = Instance.new("TextButton") -- Giữ nguyên nút dạng Toggle
+local ButtonCorner = Instance.new("UICorner")
+local ButtonStroke = Instance.new("UIStroke")
+
+-- Các nút Tắt/Bật Menu
+local CloseBtn = Instance.new("TextButton")
+local OpenBtn = Instance.new("TextButton")
+local OpenCorner = Instance.new("UICorner")
+local OpenStroke = Instance.new("UIStroke")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.Name = "GlassmorphismUI"
+
+-- 2. KHUNG CHÍNH TRONG SUỐT (CHIỀU CAO 280)
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+MainFrame.BackgroundTransparency = 0.35
+MainFrame.Position = UDim2.new(0.35, 0, 0.3, 0)
+MainFrame.Size = UDim2.new(0, 360, 0, 280) 
+MainFrame.Active = true
+MainFrame.Selectable = true
+
+UICorner.CornerRadius = UDim.new(0, 16)
+UICorner.Parent = MainFrame
+
+UIStroke.Parent = MainFrame
+UIStroke.Thickness = 1.5
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Transparency = 0.7
+UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+-- 3. TIÊU ĐỀ
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0, 15, 0, 15)
+Title.Size = UDim2.new(0, 250, 0, 25)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "@nhatnecanacc Hub"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 16
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+-- 3.5. KHUNG GHI CHÚ
+NoteLabel.Name = "NoteLabel"
+NoteLabel.Parent = MainFrame
+NoteLabel.BackgroundTransparency = 1
+NoteLabel.Position = UDim2.new(0, 15, 0, 42)
+NoteLabel.Size = UDim2.new(0, 250, 0, 20)
+NoteLabel.Font = Enum.Font.GothamItalic
+NoteLabel.Text = "Ghi chú: Script an toàn, không cần key!"
+NoteLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+NoteLabel.TextSize = 12
+NoteLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- 4. NÚT TẮT MENU (CLOSE BUTTON)
+CloseBtn.Name = "CloseBtn"
+CloseBtn.Parent = MainFrame
+CloseBtn.BackgroundTransparency = 1
+CloseBtn.Position = UDim2.new(1, -40, 0, 15)
+CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.Text = "✕"
+CloseBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+CloseBtn.TextSize = 18
+
+-- 5. NÚT MỞ MENU (OPEN BUTTON)
+OpenBtn.Name = "OpenBtn"
+OpenBtn.Parent = ScreenGui
+OpenBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+OpenBtn.BackgroundTransparency = 0.4
+OpenBtn.Position = UDim2.new(0.02, 0, 0.15, 0)
+OpenBtn.Size = UDim2.new(0, 50, 0, 50)
+OpenBtn.Font = Enum.Font.GothamBold
+OpenBtn.Text = "👁️"
+OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenBtn.TextSize = 22
+OpenBtn.Visible = false
+
+OpenCorner.CornerRadius = UDim.new(1, 0)
+OpenCorner.Parent = OpenBtn
+
+OpenStroke.Parent = OpenBtn
+OpenStroke.Thickness = 1.5
+OpenStroke.Color = Color3.fromRGB(50, 255, 150)
+OpenStroke.Transparency = 0.5
+
+-- LOGIC TẮT / MỞ
+CloseBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    OpenBtn.Visible = true
+end)
+
+OpenBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = true
+    OpenBtn.Visible = false
+end)
+
+CloseBtn.MouseEnter:Connect(function() CloseBtn.TextColor3 = Color3.fromRGB(255, 50, 50) end)
+CloseBtn.MouseLeave:Connect(function() CloseBtn.TextColor3 = Color3.fromRGB(255, 100, 100) end)
+OpenBtn.MouseEnter:Connect(function() OpenBtn.BackgroundTransparency = 0.2 end)
+OpenBtn.MouseLeave:Connect(function() OpenBtn.BackgroundTransparency = 0.4 end)
+
+-- 6. NÚT BẤM GIỮ NGUYÊN LOGIC TOGGLE (TEDDY-NOKEY)
+ToggleBtn.Name = "ToggleBtn"
+ToggleBtn.Parent = MainFrame
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ToggleBtn.BackgroundTransparency = 0.9
+ToggleBtn.Position = UDim2.new(0.1, 0, 0.48, 0)
+ToggleBtn.Size = UDim2.new(0.8, 0, 0, 48)
+ToggleBtn.Font = Enum.Font.GothamMedium
+ToggleBtn.Text = "🔴 teddy-nokey: Disabled"
+ToggleBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+ToggleBtn.TextSize = 14
+
+ButtonCorner.CornerRadius = UDim.new(0, 10)
+ButtonCorner.Parent = ToggleBtn
+
+ButtonStroke.Parent = ToggleBtn
+ButtonStroke.Thickness = 1.2
+ButtonStroke.Color = Color3.fromRGB(255, 75, 75) -- Mặc định viền đỏ khi tắt
+ButtonStroke.Transparency = 0.3
+
+ToggleBtn.MouseEnter:Connect(function() ToggleBtn.BackgroundTransparency = 0.8 end)
+ToggleBtn.MouseLeave:Connect(function() ToggleBtn.BackgroundTransparency = 0.9 end)
+
+-- LOGIC BẬT / TẮT CHUẨN ĐƯỢC GIỮ NGUYÊN
+local isToggled = false
+ToggleBtn.MouseButton1Click:Connect(function()
+    isToggled = not isToggled
+    if isToggled then
+        -- Khi chuyển sang BẬT
+        ToggleBtn.Text = "🟢 teddy-nokey: Enabled"
+        ToggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ButtonStroke.Color = Color3.fromRGB(50, 255, 150) -- Đổi viền sang xanh neon
+        
+        -- Kích hoạt mã nguồn khi On
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/main.lua"))()
+        end)
+    else
+        -- Khi chuyển sang TẮT
+        ToggleBtn.Text = "🔴 teddy-nokey: Disabled"
+        ToggleBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+        ButtonStroke.Color = Color3.fromRGB(255, 75, 75) -- Đổi viền về đỏ
+    end
+end)
+
+-- 7. SCRIPT KÉO THẢ (DRAGGABLE)
+local UserInputService = game:GetService("UserInputService")
+local dragging, dragInput, dragStart, startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true; dragStart = input.Position; startPos = MainFrame.Position
+        input.Changed:Connect(function() if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+    end
+end)
+MainFrame.InputChanged:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
+UserInputService.InputChanged:Connect(function(input) if input == dragInput and dragging then update(input) end end)
+
+local dragOpen, startPosOpen
+OpenBtn.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragOpen = true; dragStart = input.Position; startPosOpen = OpenBtn.Position
+        input.Changed:Connect(function() if input.UserInputState == Enum.UserInputState.End then dragOpen = false end end)
+    end
+end)
+UserInputService.InputChanged:Connect(function(input)
+    if dragOpen and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - dragStart
+        OpenBtn.Position = UDim2.new(startPosOpen.X.Scale, startPosOpen.X.Offset + delta.X, startPosOpen.Y.Scale, startPosOpen.Y.Offset + delta.Y)
+    end
+end)
